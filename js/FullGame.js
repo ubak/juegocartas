@@ -5,20 +5,45 @@ var FullGame = function(){
     this.background = game.add.sprite(0,0, 'background');
     this.card = null;
     this.deck = new Deck_fire();
-    
-    this.card = this.deck.deck_1[1];
-    
-    console.log(this.card);
+    this.state = 1;
     
     this.update = function() {
         
-        //para mover la carta una vez seleccionada
-        if(this.card != null) this.deck.setPosition(this.card);
+        switch(state){
+                //robar carta
+            case 1:
+                break;
+                //colocar cartas
+            case 2: 
+                break;
+                //atacar
+            case 3:
+                break;
+                //defender
+            case 4:
+                break;
+                //calcuar vidas muertes etc...
+            case 5:
+                break;
+        }
         
-        //prueva de que si se pulsa la tecla up (despues se camibara por el click del raton) selecciona la carta deseada
+        
+        
+        
+        
+        /*//para mover la carta una vez seleccionada
+        if(this.card != null){
+            this.deck.setPosition(this.card);
+        
+        }
+        //si se pulsa la tecla up (despues se camibara por el click del raton) selecciona la carta deseada
         if (this.cursor.up.isDown) {
-            this.card = this.deck.checkMousePos(game.input.mousePointer.x, game.input.mousePointer.y);
+            this.card = this.deck.checkMousePos(game.input.mousePointer.x, game.input.mousePointer.y); 
 		}
+        else if (this.cursor.down.isDown) {
+            this.card = null;
+		}
+        console.log(this.card);*/
     };
     
 }
