@@ -5,16 +5,32 @@ var FullGame = function(){
     this.background = game.add.sprite(0,0, 'background');
     this.card = null;
     this.deck = new Deck_fire();
-    this.state = 1;
+    this.state = 0;
+    
+    this.debugRender = new Renderpositions();
     
     this.update = function() {
         
-        switch(state){
+       switch(this.state){
+                 //poner roba 7 cartas
+            case 0:
+                for(var i = 0; i < 5; i++){
+                    this.deck.pickUpCard();
+                }
+               console.log("saliendo stado 1"); 
+               this.state = 1;
+               break;
+                
                 //robar carta
             case 1:
-                break;
+                this.deck.pickUpCard();
+                console.log("saliendo stado 1");  
+                this.state = 2;
+               
+               break;
+               
                 //colocar cartas
-            case 2: 
+            /*case 2: 
                 break;
                 //atacar
             case 3:
@@ -24,7 +40,7 @@ var FullGame = function(){
                 break;
                 //calcuar vidas muertes etc...
             case 5:
-                break;
+                break;*/
         }
         
         

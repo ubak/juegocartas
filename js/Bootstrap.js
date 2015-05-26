@@ -1,7 +1,7 @@
 var mainscreen = null;
 var game = new Phaser.Game(
-    1000, 
-    680, 
+    1500, 
+    780, 
     Phaser.AUTO, 
     '', 
     {         
