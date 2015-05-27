@@ -19,7 +19,7 @@ var FullGame = function(){
     this.update = function() {
         
         this.timer ++;
-        
+        console.warn(this.state);
        switch(this.state){
                  //poner roba 7 cartas
             case 0:
@@ -48,8 +48,8 @@ var FullGame = function(){
                     this.manaInGame ++;
                     console.log("saliendo stado 1");  
                     this.state = 2;
-                    break;
                 }
+               break;
                 //colocar cartas
             case 2: 
                 if(this.card != null){
@@ -71,8 +71,8 @@ var FullGame = function(){
                 else if (this.cursor.left.isDown){
                     console.log("saliendo stado 2");  
                     this.state = 3;
-                    break;
                 }
+               break;
                 //atacar
             /*case 3:
                 break;
@@ -89,8 +89,8 @@ var FullGame = function(){
                    if(this.playerTurn == 1) this.playerTurn = 2;
                    else if(this.playerTurn == 2) this.playerTurn = 1;
                    this.state = 1;
-                   break;
                }
+               break;
         }
         
         
