@@ -12,20 +12,68 @@ var Deck_fire = function(){
     
     //para cambiar la posicion de la carta seleccionada
     this.setPosition = function(card){
-        this.deck[card].setPos(game.input.activePointer.x, game.input.activePointer.y);
-        
+        this.deck[card].setPos(game.input.activePointer.x, game.input.activePointer.y);    
+    }
+    
+    this.repartir = function(){
+        for(var j = 0; j < this.deck.length; j ++){
+            if(this.deck[j].getWhere() == 0){
+                this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
+                this.deck[j].setWhere(1);
+                this.deck[j].swapImg();
+                break;
+            }
+        } 
     }
     
     this.pickUpCard = function (){
         var j;
-        for(j = 0; j < this.deck.length; j ++){
-            if(this.deck[j].getWhere() == 0){
-                this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
-                this.deck[j].swapImg();
-                this.deck[j].setWhere(1);
+        var x;
+        this.empty = true;
+        this.card;
+        
+        for(x = 0; x < this.deck.length; x++){
+            if(this.deck[x].getWhere() == 0){
+                this.card = x;
+                this.deck[this.card].setWhere(1);
+                console.log("carta"+this.card);
                 break;
             }
-        }  
+        }
+        
+        for(j = 0; j < this.debugRender.handPositionsAviablesPlayer1.length ;j++){
+            for(var i = 0; i < this.deck.length; i++){
+                if(this.debugRender.handPositionsAviablesPlayer1[j].x == this.deck[i].getPosX() && this.debugRender.handPositionsAviablesPlayer1[j].y == this.deck[i].getPosY()){
+                    this.empty = false;
+                    break;
+                } else this.empty = true;
+            }
+            if(this.empty == true){ 
+                console.log("entra");
+                this.deck[this.card].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
+                break;
+            }
+        } 
+    }
+    
+    this.putCardinGame = function(card){
+        this.empty = true;
+        var j;
+        
+        for(j = 0; j < this.debugRender.gamePositionsAviablesPlayer1.length ;j++){
+            for(var i = 0; i < this.deck.length; i++){
+                if(this.debugRender.gamePositionsAviablesPlayer1[j].x == this.deck[i].getPosX() && this.debugRender.gamePositionsAviablesPlayer1[j].y == this.deck[i].getPosY()){
+                    this.empty = false;
+                    break;
+                } else this.empty = true;
+            }
+            if(this.empty == true){ 
+                console.log("entra");
+                this.deck[card].setPos(this.debugRender.gamePositionsAviablesPlayer1[j].x,this.debugRender.gamePositionsAviablesPlayer1[j].y);
+                break;
+            }
+        }
+        
     }
     
     //para comprobar si el mouse esta encima de alguna de las cartaas
@@ -37,5 +85,9 @@ var Deck_fire = function(){
                 return j;
             }
         }   
+    }
+    
+    this.checkMana = function(mana,card){
+        return (mana - this.deck[card].getMana());
     }
 }
