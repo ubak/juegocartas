@@ -16,23 +16,11 @@ var Renderpositions = function(){
     
     
     //creamos la poscicion del mazo
-    this.mazoPos = {x: 1370, y: 310};
+    this.cementerio = {x: 1370, y: 310};
     
-    this.cementerioPlayer2 = {x: 1280, y: 30};
-    this.cementerioPlayer1 = {x: 1280, y: 642};
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    this.mazoPos2 = {x: 1280, y: 30};
+    this.mazoPos1 = {x: 1280, y: 642};
+        
     
     marker.lineStyle(2,0x00ff00,1);
     
@@ -54,9 +42,9 @@ var Renderpositions = function(){
     }
     
     marker.lineStyle(2,0x0000ff,1);
-    marker.drawRect(this.mazoPos.x,this.mazoPos.y,108,150);
+    marker.drawRect(this.mazoPos1.x,this.mazoPos1.y,150,108);
+    marker.drawRect(this.mazoPos2.x,this.mazoPos2.y,150,108);
     
-    marker.drawRect(this.cementerioPlayer1.x,this.cementerioPlayer1.y,150,108);
-    marker.drawRect(this.cementerioPlayer2.x,this.cementerioPlayer2.y,150,108);
+    marker.drawRect(this.cementerio.x,this.cementerio.y,108,150);
     
 }

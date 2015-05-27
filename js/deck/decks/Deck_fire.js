@@ -1,4 +1,4 @@
-var Deck_fire = function(){
+var Deck_fire = function(player){
     
     this.debugRender = new Renderpositions();
     //creamos un mazo de 10 cartas
@@ -6,7 +6,7 @@ var Deck_fire = function(){
 
     // rellenamos el mazo con los trasgos y dragones para hacer pruevas
     for (var i = 0; i < 20; i++){
-        this.deck[i] = new Patrulla_de_trasgos();
+        this.deck[i] = new Patrulla_de_trasgos(player);
         console.log(this.deck[i]);
     }
     
@@ -15,10 +15,12 @@ var Deck_fire = function(){
         this.deck[card].setPos(game.input.activePointer.x, game.input.activePointer.y);    
     }
     
-    this.repartir = function(){
+    this.repartir = function(turn){
+        
         for(var j = 0; j < this.deck.length; j ++){
             if(this.deck[j].getWhere() == 0){
-                this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
+                if(turn == 1)this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
+                else this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer2[j].x,this.debugRender.handPositionsAviablesPlayer2[j].y);
                 this.deck[j].setWhere(1);
                 this.deck[j].swapImg();
                 break;
@@ -26,7 +28,12 @@ var Deck_fire = function(){
         } 
     }
     
-    this.pickUpCard = function (){
+    this.pickUpCard = function (turn){
+        this.handInGame = this.debugRender.handPositionsAviablesPlayer1;
+        
+        if(turn == 1) this.handInGame = this.debugRender.handPositionsAviablesPlayer1;
+        else this.handInGame = this.debugRender.handPositionsAviablesPlayer2;
+        
         var j;
         var x;
         this.empty = true;
@@ -41,35 +48,40 @@ var Deck_fire = function(){
             }
         }
         
-        for(j = 0; j < this.debugRender.handPositionsAviablesPlayer1.length ;j++){
+        for(j = 0; j < this.handInGame.length ;j++){
             for(var i = 0; i < this.deck.length; i++){
-                if(this.debugRender.handPositionsAviablesPlayer1[j].x == this.deck[i].getPosX() && this.debugRender.handPositionsAviablesPlayer1[j].y == this.deck[i].getPosY()){
+                if(this.handInGame[j].x == this.deck[i].getPosX() && this.handInGame[j].y == this.deck[i].getPosY()){
                     this.empty = false;
                     break;
                 } else this.empty = true;
             }
             if(this.empty == true){ 
                 console.log("entra");
-                this.deck[this.card].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
+                this.deck[this.card].setPos(this.handInGame[j].x,this.handInGame[j].y);
                 break;
             }
         } 
     }
     
-    this.putCardinGame = function(card){
+    this.putCardinGame = function(card,turn){
+        this.gameInGame = this.debugRender.gamePositionsAviablesPlayer1;
+        
+        if(turn == 1) this.gameInGame = this.debugRender.gamePositionsAviablesPlayer1;
+        else this.gameInGame = this.debugRender.gamePositionsAviablesPlayer2;
+        
         this.empty = true;
         var j;
         
-        for(j = 0; j < this.debugRender.gamePositionsAviablesPlayer1.length ;j++){
+        for(j = 0; j < this.gameInGame.length ;j++){
             for(var i = 0; i < this.deck.length; i++){
-                if(this.debugRender.gamePositionsAviablesPlayer1[j].x == this.deck[i].getPosX() && this.debugRender.gamePositionsAviablesPlayer1[j].y == this.deck[i].getPosY()){
+                if(this.gameInGame[j].x == this.deck[i].getPosX() && this.gameInGame[j].y == this.deck[i].getPosY()){
                     this.empty = false;
                     break;
                 } else this.empty = true;
             }
             if(this.empty == true){ 
                 console.log("entra");
-                this.deck[card].setPos(this.debugRender.gamePositionsAviablesPlayer1[j].x,this.debugRender.gamePositionsAviablesPlayer1[j].y);
+                this.deck[card].setPos(this.gameInGame[j].x,this.gameInGame[j].y);
                 break;
             }
         }
