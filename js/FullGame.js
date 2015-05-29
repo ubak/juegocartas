@@ -74,16 +74,30 @@ var FullGame = function(){
                 }
                break;
                 //atacar
-            /*case 3:
+               
+            case 3:
+               if (this.cursor.down.isDown && this.timer % 5 == 0){
+                    console.log(this.atacantes);
+               }
+               
+               if (this.cursor.up.isDown && this.timer % 5 == 0) {
+                    this.card = this.deckInGame.checkMousePos(game.input.mousePointer.x, game.input.mousePointer.y);
+                    if(this.card != null){
+                        this.atacantes = this.deckInGame.selectAtacantes(this.card);
+                    }
+                }
+               
                 break;
+               
+               
                 //defender
-            case 4:
+            /*case 4:
                 break;
                 //calcuar vidas muertes etc...
             case 5:
                 break;*/
                //cambiar de turno
-            case 3:
+            case 6:
                if(this.cursor.left.isDown && this.timer % 5){
                    console.log("cambiando turno");
                    if(this.playerTurn == 1) this.playerTurn = 2;

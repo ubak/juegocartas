@@ -17,7 +17,7 @@ var Patrulla_de_trasgos = function(player){
     this.back.angle = -90;
     this.imagen = this.front;   
     this.imagen.angle = -90;
-    this.where = 0; //0 = mazo 1 = mano 2 = en juego
+    this.where = 0; //0 = mazo 1 = mano 2 = en juego 3 = atacando = 4 defendiendo 5 = en reload
     
  //   this.imagen.scale.setTo(0.15,0.15);
 

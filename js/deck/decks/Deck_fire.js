@@ -3,6 +3,7 @@ var Deck_fire = function(player){
     this.debugRender = new Renderpositions();
     //creamos un mazo de 10 cartas
     this.deck = [];
+    this.atacantes = [];
 
     // rellenamos el mazo con los trasgos y dragones para hacer pruevas
     for (var i = 0; i < 20; i++){
@@ -82,6 +83,7 @@ var Deck_fire = function(player){
             if(this.empty == true){ 
                 console.log("entra");
                 this.deck[card].setPos(this.gameInGame[j].x,this.gameInGame[j].y);
+                this.deck[card].setWhere(2);
                 break;
             }
         }
@@ -101,5 +103,19 @@ var Deck_fire = function(player){
     
     this.checkMana = function(mana,card){
         return (mana - this.deck[card].getMana());
+    }
+    
+    this.selectAtacantes = function (card){
+        
+        console.warn("carta: "+ this.deck[card]);
+        
+        if(this.deck[card] != null){
+            if(this.deck[card].getWhere() == 2){
+                console.warn("carta encontrada "+ card);
+                this.deck[card].setWhere(3);
+                this.atacantes.push(this.deck[card]);
+            }
+        }
+        return this.atacantes;
     }
 }
