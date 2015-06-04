@@ -3,8 +3,7 @@ var Deck_fire = function(player){
     this.debugRender = new Renderpositions();
     //creamos un mazo de 10 cartas
     this.deck = [];
-    this.atacantes = [];
-
+    
     // rellenamos el mazo con los trasgos y dragones para hacer pruevas
     for (var i = 0; i < 20; i++){
         this.deck[i] = new Patrulla_de_trasgos(player);
@@ -17,16 +16,23 @@ var Deck_fire = function(player){
     }
     
     this.repartir = function(turn){
-        
-        for(var j = 0; j < this.deck.length; j ++){
+        for(var j = 0; j < 5; j ++){
             if(this.deck[j].getWhere() == 0){
                 if(turn == 1)this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer1[j].x,this.debugRender.handPositionsAviablesPlayer1[j].y);
                 else this.deck[j].setPos(this.debugRender.handPositionsAviablesPlayer2[j].x,this.debugRender.handPositionsAviablesPlayer2[j].y);
                 this.deck[j].setWhere(1);
-                this.deck[j].swapImg();
+                //this.deck[j].swapImg();
                 break;
             }
         } 
+    }
+    
+    this.getDeck = function (){
+        return this.deck;
+    }
+    
+    this.getCard = function (card){
+        return this.deck[card];
     }
     
     this.pickUpCard = function (turn){
@@ -105,17 +111,21 @@ var Deck_fire = function(player){
         return (mana - this.deck[card].getMana());
     }
     
-    this.selectAtacantes = function (card){
-        
-        console.warn("carta: "+ this.deck[card]);
-        
+    this.selectAtacantes = function (card){ 
         if(this.deck[card] != null){
             if(this.deck[card].getWhere() == 2){
-                console.warn("carta encontrada "+ card);
-                this.deck[card].setWhere(3);
-                this.atacantes.push(this.deck[card]);
+                this.deck[card].setWhere(3);          
             }
         }
-        return this.atacantes;
     }
+    
+    this.chekIfAtack = function(card){
+        if (this.deck[card].getWhere()==3){
+            return true;
+        }
+        return false;
+    }
+    /*this.clearGraphs = function(){
+        this.marker.clear();
+    }*/
 }

@@ -9,12 +9,14 @@ var Patrulla_de_trasgos = function(player){
         this.mazoInGame = {x: this.debugRender.mazoPos2.x, y: this.debugRender.mazoPos2.y +108}; 
     }
     
-    var atack = 2;
-    var defensa = 1;
+    this.atack = 2;
+    this.defensa = 1;
     this.mana = 1;
     this.front = game.add.sprite(this.mazoInGame.x,this.mazoInGame.y, 'patrulla_de_trasgos');
+    this.front_sel = game.add.sprite(this.mazoInGame.x,this.mazoInGame.y, 'patrulla_de_trasgos_sel');
     this.back = game.add.sprite(this.mazoInGame.x,this.mazoInGame.y, 'parteAtras');
     this.back.angle = -90;
+    this.front_sel.angle = -90;
     this.imagen = this.front;   
     this.imagen.angle = -90;
     this.where = 0; //0 = mazo 1 = mano 2 = en juego 3 = atacando = 4 defendiendo 5 = en reload
@@ -39,6 +41,18 @@ var Patrulla_de_trasgos = function(player){
     
     this.setWhere = function(num){
         this.where = num;
+        if(num == 3){
+            this.imagen = this.front_sel;
+            console.log("imagen seleccion");
+        }
+        else if(num == 0){
+            this.imagen = this.back;
+            console.log("imagen atras");
+        }
+        else {
+            this.imagen = this.front;
+            console.log("imagen front");
+        }
     }
     
     //coger posicion X
@@ -51,14 +65,21 @@ var Patrulla_de_trasgos = function(player){
         return this.imagen.position.y;
     }
     
-    this.swapImg = function(){
-        //if(this.imagen == this.front) this.imagen = this.back;
+   /* this.swapImg = function(){
         this.imagen = this.front;
         console.log(this.imagen);
     }
-    
+    */
     this.getMana = function(){
         return this.mana;
+    }
+    
+    this.getAtack = function(){
+        return this.atack;
+    }
+    
+    this.getDefensa = function(){
+        return this.defensa;
     }
     
 };
